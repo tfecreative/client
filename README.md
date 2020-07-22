@@ -2,7 +2,7 @@
 
 ## Description
 
-Frontend for tfeCreative uses [Vue](https://vuejs.org/) and [Vuex](https://vuex.vuejs.org/).
+Clint for tfeCreative uses [Vue](https://vuejs.org/) and [Vuex](https://vuex.vuejs.org/).
 
 ## Build
 
