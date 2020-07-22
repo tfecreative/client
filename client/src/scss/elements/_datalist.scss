@@ -1,0 +1,16 @@
+dl.inline {
+  display: flex;
+  flex-wrap: wrap;
+  font-size: $font-size-lg;
+
+  dt {
+    flex: 0 0 50%;
+    font-weight: $font-weight-bold;
+    overflow: hidden;
+  }
+  dd {
+    flex: 0 0 50%;
+    margin-left: auto;
+    overflow: hidden;
+  }
+}

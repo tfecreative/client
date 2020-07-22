@@ -1,0 +1,27 @@
+.tfe-header {
+  display: flex;
+  padding: $spacing-md $spacing-sm;
+  justify-content: center;
+
+  @include themed() {
+    color: t($text);
+    background: t($bg);
+  }
+
+  &__title {
+    position: relative;
+    font-family: $sans-serif;
+    font-size: $font-size-xxxl;
+    letter-spacing: 2px;
+    color: tfe-color("secondary", "light");
+
+    &:after {
+      content: "tfeCreative";
+      position: absolute;
+      left: 1px;
+      top: -4px;
+      color: tfe-color("primary");
+      mix-blend-mode: multiply;
+    }
+  }
+}

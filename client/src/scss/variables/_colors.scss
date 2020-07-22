@@ -1,0 +1,119 @@
+// Themes
+$bg: 'bg';
+$text: 'text';
+
+$bg--light: #ffffff;
+$text--light: #a91f20;
+
+$bg--dark: #333333;
+$text--dark: #25b26f;
+
+
+$themes: (
+  light: (
+    bg: $bg--light,
+    text: $text--light,
+  ),
+  dark: (
+    bg: $bg--dark,
+    text: $text--dark,
+  ),
+);
+
+@mixin themed() {
+  @each $theme, $map in $themes {
+    .theme--#{$theme} & {
+      $theme-map: () !global;
+      @each $key, $submap in $map {
+        $value: map-get(map-get($themes, $theme), "#{$key}");
+        $theme-map: map-merge(
+          $theme-map,
+          (
+            $key: $value,
+          )
+        ) !global;
+      }
+      @content;
+      $theme-map: null !global;
+    }
+  }
+}
+
+@function t($key) {
+  @return map-get($theme-map, $key);
+}
+
+// Colors
+$tfe-color-key: "base" !default;
+$tfe-colors: (
+  "primary": (
+    "base": #e63335,
+    "light": #eb504e,
+    "dark": #a91f20,
+  ),
+  "secondary": (
+    "base": #5d78ff,
+    "light": #45c4ff,
+    "dark": #4458ba,
+  ),
+  "accent": (
+    "base": #f8f052,
+    "light": #fdfa5d,
+    "dark": #e9ce2c,
+  ),
+  "foreground": (
+    "base": #02111b,
+    "light": #1e1e1e,
+    "dark": #191b1b,
+  ),
+  "background": (
+    "base": #ffffff,
+    "light": #ffffff,
+    "dark": #fdfffc,
+  ),
+  "gray": (
+    "base": #aeaeae,
+    "light": #d9d9d9,
+    "dark": #454545,
+  ),
+);
+
+@function tfe-color($name: "primary", $variant: $tfe-color-key, $opacity: 1) {
+  $color: null;
+  $color-spectrum: map-get($tfe-colors, $name);
+
+  @if $color-spectrum {
+    $color: map-get($color-spectrum, $variant);
+  }
+
+  $alpha: if(
+    type-of($opacity) == "number",
+    $opacity,
+    map-get($tfe-opacity, $opacity)
+  );
+
+  @if $alpha {
+    $color: rgba($color, $alpha);
+  }
+
+  @return $color;
+}
+
+$color-interval: 10% !global;
+@function tfe-color-level($color-name: "primary", $level: 0) {
+  $color: tfe-color($color-name);
+  $color-base: if($level < 0, black, white);
+
+  @return mix($color-base, $color, $level * $color-interval);
+}
+
+$tfe-opacity: (
+  "light": 0.8,
+  "dark": 0.4,
+);
+
+@function tfe-color-alpha($name: "primary", $opacity: 0) {
+  $color: tfe-color($name);
+  $opacity: map-get($tfe-opacity, $opacity);
+  @return rgba($color, $opacity);
+}

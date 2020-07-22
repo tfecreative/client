@@ -1,0 +1,16 @@
+.tfe-footer {
+  display: flex;
+  padding: $spacing-md $spacing-xxs;
+  justify-content: center;
+  padding: 0 $spacing-sm;
+  justify-content: flex-start;
+
+  @include themed() {
+    color: t($text);
+    background: t($bg);
+  }
+
+  .status {
+    width: 150px;
+  }
+}

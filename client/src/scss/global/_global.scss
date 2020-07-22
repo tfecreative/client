@@ -1,0 +1,42 @@
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.site-content {
+  @include themed() {
+    color: t($text);
+    background: t($bg);
+  }
+
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  margin: 0 $spacing-md;
+  min-height: 100%;
+  flex-grow: 1;
+
+  @include sm {
+    margin: 0;
+  }
+}
+
+.section {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  margin-top: $spacing-xxl;
+
+  @include md {
+    margin-right: auto;
+    margin-left: auto;
+    width: 900px;
+  }
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
